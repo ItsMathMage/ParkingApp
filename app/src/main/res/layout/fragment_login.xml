@@ -53,7 +53,7 @@
                 tools:layout_editor_absoluteX="10dp" />
 
             <EditText
-                android:id="@+id/firstname_field"
+                android:id="@+id/email_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_email_24"
@@ -70,11 +70,11 @@
                 android:layout_marginTop="20dp"
                 android:text="Пароль"
                 android:textSize="25sp"
-                app:layout_constraintTop_toBottomOf="@+id/firstname_field"
+                app:layout_constraintTop_toBottomOf="@+id/email_field"
                 tools:layout_editor_absoluteX="30dp" />
 
             <EditText
-                android:id="@+id/lastname_field"
+                android:id="@+id/password_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_lock_24"
@@ -95,7 +95,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lastname_field" />
+                app:layout_constraintTop_toBottomOf="@+id/password_field" />
 
             <TextView
                 android:id="@+id/middle_label"

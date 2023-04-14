@@ -1,6 +1,5 @@
 package com.example.parkingapp
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class RegisterFragment : Fragment() {
 
@@ -33,8 +33,8 @@ class RegisterFragment : Fragment() {
         buttonRegister.setOnClickListener {
             auth = FirebaseAuth.getInstance()
 
-            val firstnameField = view.findViewById<EditText>(R.id.firstname_field)
-            val lastnameField = view.findViewById<EditText>(R.id.lastname_field)
+            val firstnameField = view.findViewById<EditText>(R.id.email_field)
+            val lastnameField = view.findViewById<EditText>(R.id.password_field)
             val emailField = view.findViewById<EditText>(R.id.email_field)
             val phoneField = view.findViewById<EditText>(R.id.phone_field)
             val passwordField = view.findViewById<EditText>(R.id.password_field)
@@ -64,8 +64,18 @@ class RegisterFragment : Fragment() {
                                 ?.addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
                                         Toast.makeText(requireContext(), "Реєстрація успішна. Підтвердження електронної пошти відправлено.", Toast.LENGTH_SHORT).show()
-                                        val tempUser = User("1", firstname, lastname, email, phone, password)
-                                        findNavController().navigate(R.id.action_registerFragment_to_mainFragment)
+
+                                        val uid = user.uid
+                                        val tempUser = User(uid, firstname, lastname, email, phone, password)
+
+                                        val databaseRef = FirebaseDatabase.getInstance().reference
+                                        databaseRef.child("users").child(uid).setValue(tempUser)
+
+                                        val bundle = Bundle().apply {
+                                            putString("UID", uid)
+                                        }
+
+                                        findNavController().navigate(R.id.action_registerFragment_to_mainFragment, bundle)
                                     }
                                 }
                         } else {

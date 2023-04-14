@@ -1,5 +1,8 @@
 package com.example.parkingapp
 
+import android.os.Parcel
+import android.os.Parcelable
+
 class User (
     var uid: String,
     var firstname: String,
@@ -8,6 +11,8 @@ class User (
     var phone: String,
     var password: String
 ) {
+    constructor() : this("", "", "", "", "", "")
+
     // Конструктор з усіма властивостями класу
     init {
         // Ініціалізуємо властивості за допомогою переданих параметрів
