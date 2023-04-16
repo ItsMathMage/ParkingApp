@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SettingsFragment">
+    tools:context=".CarFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Налаштування"
+                android:text="Транспорт"
                 android:textAlignment="center"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/white"
@@ -34,7 +35,7 @@
                 tools:layout_editor_absoluteY="5dp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_menu2"
+                android:id="@+id/button_menu3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/baseline_menu_24"
@@ -55,19 +56,19 @@
                 android:id="@+id/data_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Дані акаунту:"
+                android:text="Дані про машину:"
                 android:textSize="25sp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="10dp"/>
 
             <EditText
-                android:id="@+id/your_firstname_field"
+                android:id="@+id/firm_car_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:drawableLeft="@drawable/baseline_accessibility_new_24"
                 android:drawablePadding="8dp"
-                android:hint="Ваше ім'я"
+                android:hint="Фірма транспорту"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
                 app:layout_constraintTop_toBottomOf="@+id/data_label"
@@ -76,73 +77,48 @@
                 android:imeOptions="actionNext"/>
 
             <EditText
-                android:id="@+id/your_lastname_field"
+                android:id="@+id/model_car_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:drawableLeft="@drawable/baseline_accessibility_new_24"
                 android:drawablePadding="8dp"
-                android:hint="Ваше прізвище"
+                android:hint="Модель транспорту"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                app:layout_constraintTop_toBottomOf="@+id/your_firstname_field"
+                app:layout_constraintTop_toBottomOf="@+id/firm_car_field"
                 tools:layout_editor_absoluteX="10dp"
                 android:lines="1"
                 android:imeOptions="actionNext"/>
 
             <EditText
-                android:id="@+id/your_email_field"
+                android:id="@+id/color_car_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:drawableLeft="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
-                android:hint="Ваш email"
+                android:hint="Колір транспорту"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
-                app:layout_constraintTop_toBottomOf="@+id/your_lastname_field"
+                app:layout_constraintTop_toBottomOf="@+id/model_car_field"
                 tools:layout_editor_absoluteX="10dp"
                 android:imeOptions="actionNext"/>
 
 
             <EditText
-                android:id="@+id/your_phone_field"
+                android:id="@+id/number_car_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:drawableLeft="@drawable/baseline_phone_24"
                 android:drawablePadding="8dp"
-                android:hint="Ваш номер телефону"
+                android:hint="Номер транспорту"
                 android:imeOptions="actionNext"
                 android:minHeight="48dp"
                 android:inputType="phone"
-                app:layout_constraintTop_toBottomOf="@+id/your_email_field"
+                app:layout_constraintTop_toBottomOf="@+id/color_car_field"
                 tools:layout_editor_absoluteX="30dp" />
-
-            <EditText
-                android:id="@+id/your_password_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/baseline_lock_24"
-                android:drawablePadding="8dp"
-                android:hint="Ваш пароль"
-                android:minHeight="48dp"
-                app:layout_constraintTop_toBottomOf="@+id/your_phone_field"
-                tools:layout_editor_absoluteX="10dp"
-                android:imeOptions="actionNext"/>
-
-            <EditText
-                android:id="@+id/your_uid_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/baseline_supervised_user_circle_24"
-                android:drawablePadding="8dp"
-                android:hint="Ваш id"
-                android:minHeight="48dp"
-                app:layout_constraintTop_toBottomOf="@+id/your_password_field"
-                tools:layout_editor_absoluteX="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -163,7 +139,7 @@
                     android:textColor="@color/black" />
 
                 <Button
-                    android:id="@+id/save_button"
+                    android:id="@+id/save_car_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"

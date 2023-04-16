@@ -1,6 +1,6 @@
 package com.example.parkingapp
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,13 +22,17 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
-        val bundle = arguments
-        val uid: String? = bundle?.getString("UID")
+        val userPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val uid = userPref.getString("UID", "")
 
         var user = User()
 
-
         val databaseReference = FirebaseDatabase.getInstance().getReference("users")
+
+        val uidPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = uidPref.edit()
+        editor.putString("UID", uid)
+        editor.apply()
 
         if (uid != null) {
             databaseReference.child(uid).addValueEventListener(object : ValueEventListener {
@@ -49,7 +53,7 @@ class MainFragment : Fragment() {
             val popupMenu = PopupMenu(requireContext(), buttonMenu)
 
             // Додаємо елементи меню
-            popupMenu.menu.add("Машина")
+            popupMenu.menu.add("Транспорт")
             popupMenu.menu.add("Налаштування")
             popupMenu.menu.add("Вийти з акаунту")
 
@@ -59,8 +63,8 @@ class MainFragment : Fragment() {
             // Обробка вибору елемента меню
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item.title) {
-                    "Машина" -> {
-                        // Обробка вибору елемента 1
+                    "Транспорт" -> {
+                        findNavController().navigate(R.id.action_mainFragment_to_carFragment)
                         true
                     }
                     "Налаштування" -> {

@@ -1,5 +1,6 @@
 package com.example.parkingapp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,13 +46,14 @@ class LoginFragment : Fragment() {
                         // Якщо успішно, переходимо на головний екран
                         val uid = auth.currentUser?.uid
 
-                        val bundle = Bundle().apply {
-                            putString("UID", uid)
-                        }
+                        val uidPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                        val editor = uidPref.edit()
+                        editor.putString("UID", uid)
+                        editor.apply()
 
                         Toast.makeText(requireContext(), "Успішний вхід в систему", Toast.LENGTH_SHORT).show()
 
-                        findNavController().navigate(R.id.action_loginFragment_to_mainFragment, bundle)
+                        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
 
 
                     } else {

@@ -33,8 +33,8 @@ class RegisterFragment : Fragment() {
         buttonRegister.setOnClickListener {
             auth = FirebaseAuth.getInstance()
 
-            val firstnameField = view.findViewById<EditText>(R.id.email_field)
-            val lastnameField = view.findViewById<EditText>(R.id.password_field)
+            val firstnameField = view.findViewById<EditText>(R.id.firstname_field)
+            val lastnameField = view.findViewById<EditText>(R.id.lastname_field)
             val emailField = view.findViewById<EditText>(R.id.email_field)
             val phoneField = view.findViewById<EditText>(R.id.phone_field)
             val passwordField = view.findViewById<EditText>(R.id.password_field)

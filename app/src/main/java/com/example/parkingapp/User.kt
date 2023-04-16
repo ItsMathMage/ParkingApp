@@ -1,8 +1,5 @@
 package com.example.parkingapp
 
-import android.os.Parcel
-import android.os.Parcelable
-
 class User (
     var uid: String,
     var firstname: String,
