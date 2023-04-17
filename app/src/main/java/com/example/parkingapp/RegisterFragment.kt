@@ -1,5 +1,6 @@
 package com.example.parkingapp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,7 +19,8 @@ class RegisterFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
@@ -67,15 +69,18 @@ class RegisterFragment : Fragment() {
 
                                         val uid = user.uid
                                         val tempUser = User(uid, firstname, lastname, email, phone, password)
+                                        val car = Car("", "", "", "")
 
                                         val databaseRef = FirebaseDatabase.getInstance().reference
                                         databaseRef.child("users").child(uid).setValue(tempUser)
+                                        databaseRef.child("cars").child(uid).setValue(car)
 
-                                        val bundle = Bundle().apply {
-                                            putString("UID", uid)
-                                        }
+                                        val uidPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                                        val editor = uidPref.edit()
+                                        editor.putString("UID", uid)
+                                        editor.apply()
 
-                                        findNavController().navigate(R.id.action_registerFragment_to_mainFragment, bundle)
+                                        findNavController().navigate(R.id.action_registerFragment_to_mainFragment)
                                     }
                                 }
                         } else {
