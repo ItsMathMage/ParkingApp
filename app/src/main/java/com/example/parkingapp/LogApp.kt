@@ -12,6 +12,10 @@ class LogApp {
             builder.setMessage("Ви точно бажаєте вийти з акаунту?")
 
             builder.setPositiveButton("Так") { dialog, _ ->
+                val uidPref = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                val editor = uidPref.edit()
+                editor.putBoolean("ISLOG", false)
+                editor.apply()
                 navController.navigate(actionId)
             }
             builder.setNegativeButton("Ні") { dialog, _ ->

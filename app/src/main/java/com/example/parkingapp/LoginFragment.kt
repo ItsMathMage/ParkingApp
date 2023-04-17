@@ -26,7 +26,33 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
+        var userPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        var login = userPref.getString("ULOGIN", "")
+        var pass = userPref.getString("UPASS", "")
+        var isLogin = userPref.getBoolean("ISLOG", false)
+
         auth = FirebaseAuth.getInstance()
+
+
+        if (isLogin) {
+            auth.signInWithEmailAndPassword(login!!, pass!!)
+                .addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        val user = auth.currentUser!!
+                        val uid = user.uid
+
+                        if (user.isEmailVerified) {
+                            Toast.makeText(requireContext(), "Успішний вхід в систему", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                        } else {
+                            Toast.makeText(requireContext(), "Пройдіть валідацію через пошту", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        // Якщо невдалося, виводимо повідомлення про помилку
+                        Toast.makeText(requireContext(), "Невдалося увійти в систему", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
 
         val buttonLogin = view.findViewById<Button>(R.id.login_button)
         buttonLogin.setOnClickListener {
@@ -51,8 +77,10 @@ class LoginFragment : Fragment() {
                         if (user.isEmailVerified) {
                             val uidPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                             val editor = uidPref.edit()
+                            editor.putBoolean("ISLOG", true)
                             editor.putString("UID", uid)
                             editor.putString("UPASS", password)
+                            editor.putString("ULOGIN", email)
                             editor.apply()
 
                             Toast.makeText(requireContext(), "Успішний вхід в систему", Toast.LENGTH_SHORT).show()

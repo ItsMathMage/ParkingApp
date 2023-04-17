@@ -75,6 +75,15 @@ class MainFragment : Fragment() {
                 parkingSpot[selectedSpot]!!.text = "Місце \n ${(i - 1) * 6 + j}"
                 parkingSpot[selectedSpot]!!.setBackgroundResource(R.drawable.round_button)
 
+                val layoutParams = GridLayout.LayoutParams(
+                    GridLayout.spec(GridLayout.UNDEFINED, 1f),
+                    GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                )
+                layoutParams.width = 0
+                layoutParams.height = 0
+
+                parkingSpot[selectedSpot]!!.layoutParams = layoutParams
+
                 // Додати обробник події OnClickListener до кожної кнопки
                 parkingSpot[selectedSpot]!!.setOnClickListener {
                     selectedSpot = (i - 1) * 6 + j
@@ -110,7 +119,7 @@ class MainFragment : Fragment() {
                                             editor.putBoolean("ISONE", false)
                                             editor.apply()
                                         } else {
-                                            Toast.makeText(requireContext(), "Ви вже зайняли місце", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(requireContext(), "Ви вже зайняли місце", Toast.LENGTH_LONG).show()
                                         }
                                     }
                                 } else {
@@ -131,6 +140,7 @@ class MainFragment : Fragment() {
             }
         }
 
+        var carNumber = userPref.getString("CNUM", "")
         updateButtons(parkingSpot)
 
         val updateButton = view.findViewById<Button>(R.id.button_update)
@@ -177,11 +187,17 @@ class MainFragment : Fragment() {
         for (i in 1..24) {
             var updateDatabasePlace = FirebaseDatabase.getInstance().getReference("places")
             var updateParkingPlace = ParkingPlace()
+            val userPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            var carNumber = userPref.getString("CNUM", "")
             updateDatabasePlace.child(i.toString()).addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     updateParkingPlace = snapshot.getValue(ParkingPlace::class.java)!!
                     if (updateParkingPlace.isTaken) {
-                        updateParkingSpot[i]!!.setBackgroundColor(1)
+                        if (updateParkingPlace.number == carNumber) {
+                            updateParkingSpot[i]!!.setBackgroundResource(R.drawable.your_button)
+                        } else {
+                            updateParkingSpot[i]!!.setBackgroundResource(R.drawable.other_button)
+                        }
                     } else {
                         updateParkingSpot[i]!!.setBackgroundResource(R.drawable.round_button)
                     }

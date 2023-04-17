@@ -17,13 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/teal_700"
-            android:padding="10dp">
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Реєстрація"
+                android:text="Відновлення"
                 android:textAlignment="center"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/white"
