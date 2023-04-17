@@ -79,7 +79,7 @@ class SettingsFragment : Fragment() {
                         true
                     }
                     "Вийти з акаунту" -> {
-                        findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
+                        LogApp.out(findNavController(), requireContext(), R.id.action_settingsFragment_to_loginFragment)
                         true
                     }
                     else -> false

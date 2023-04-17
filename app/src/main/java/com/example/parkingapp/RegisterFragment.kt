@@ -80,7 +80,7 @@ class RegisterFragment : Fragment() {
                                         editor.putString("UID", uid)
                                         editor.apply()
 
-                                        findNavController().navigate(R.id.action_registerFragment_to_mainFragment)
+                                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                                     }
                                 }
                         } else {

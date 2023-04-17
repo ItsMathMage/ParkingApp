@@ -25,6 +25,7 @@ class MainFragment : Fragment() {
 
         val userPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val uid = userPref.getString("UID", "")
+        val pass = userPref.getString("UPASS", "")
 
         var user = User()
         var car = Car()
@@ -34,7 +35,12 @@ class MainFragment : Fragment() {
         var databasePlaces = FirebaseDatabase.getInstance().getReference("places")
         var databaseCars = FirebaseDatabase.getInstance().getReference("cars")
 
+        if (uid != null) {
+            databaseUsers.child(uid).child("password").setValue(pass)
+        }
+
         val editor = userPref.edit()
+
         editor.putString("UID", uid)
         editor.apply()
 
@@ -46,7 +52,11 @@ class MainFragment : Fragment() {
             databaseCars.child(uid).addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     car = dataSnapshot.getValue(Car::class.java)!!
-                    editor.putString("CN", car.number)
+
+                    editor.putString("CNUM", car.number)
+                    editor.putString("CNAME", car.firm)
+                    editor.putString("CCOLOR", car.color)
+
                     editor.apply()
                 }
 
@@ -67,17 +77,47 @@ class MainFragment : Fragment() {
 
                 // Додати обробник події OnClickListener до кожної кнопки
                 parkingSpot[selectedSpot]!!.setOnClickListener {
-
+                    selectedSpot = (i - 1) * 6 + j
                     databasePlaces.child(selectedSpot.toString())
                         .addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 parkingPlace = snapshot.getValue(ParkingPlace::class.java)!!
-                                val carNumber = userPref.getString("CN", "")
-                                if (parkingPlace.isTaken) {
+                                var carNumber = userPref.getString("CNUM", "")
+                                var carName = userPref.getString("CNAME", "")
+                                var tempPlace = ParkingPlace()
+                                var isCar = false
+                                var isOne = userPref.getBoolean("ISONE", true)
+                                isCar = carNumber != ""
 
+                                if (isCar) {
+                                    if (parkingPlace.isTaken) {
+                                        if (parkingPlace.number == carNumber) {
+                                            tempPlace.name = ""
+                                            tempPlace.number = ""
+                                            tempPlace.isTaken = false
+                                            databasePlaces.child(selectedSpot.toString()).setValue(tempPlace)
+                                            editor.putBoolean("ISONE", true)
+                                            editor.apply()
+                                        } else {
+                                            Toast.makeText(requireContext(), "Зайнято", Toast.LENGTH_SHORT).show()
+                                        }
+                                    } else {
+                                        if (isOne) {
+                                            tempPlace.name = carName!!
+                                            tempPlace.number = carNumber!!
+                                            tempPlace.isTaken = true
+                                            databasePlaces.child(selectedSpot.toString()).setValue(tempPlace)
+                                            editor.putBoolean("ISONE", false)
+                                            editor.apply()
+                                        } else {
+                                            Toast.makeText(requireContext(), "Ви вже зайняли місце", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
                                 } else {
-
+                                    Toast.makeText(requireContext(), "Ви не добавили машину", Toast.LENGTH_SHORT).show()
                                 }
+
+                                updateButtons(parkingSpot)
                             }
 
                             override fun onCancelled(error: DatabaseError) {
@@ -122,7 +162,7 @@ class MainFragment : Fragment() {
                         true
                     }
                     "Вийти з акаунту" -> {
-                        findNavController().navigate(R.id.action_mainFragment_to_loginFragment)
+                        LogApp.out(findNavController(), requireContext(), R.id.action_mainFragment_to_loginFragment)
                         true
                     }
                     else -> false
@@ -142,6 +182,8 @@ class MainFragment : Fragment() {
                     updateParkingPlace = snapshot.getValue(ParkingPlace::class.java)!!
                     if (updateParkingPlace.isTaken) {
                         updateParkingSpot[i]!!.setBackgroundColor(1)
+                    } else {
+                        updateParkingSpot[i]!!.setBackgroundResource(R.drawable.round_button)
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {

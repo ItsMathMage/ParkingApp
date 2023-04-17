@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".CarFragment">
+    tools:context=".ResetFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,27 +20,15 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Транспорт"
+                android:text="Реєстрація"
                 android:textAlignment="center"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/white"
                 android:textSize="30sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="10dp"
-                tools:layout_editor_absoluteY="5dp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_menu3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/baseline_menu_24"
-                android:backgroundTint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textStyle="bold" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,74 +40,30 @@
             app:layout_constraintTop_toBottomOf="@+id/head_form">
 
             <TextView
-                android:id="@+id/data_label"
+                android:id="@+id/login_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Дані про машину:"
+                android:text="Введіть пошту для відновлення паролю"
                 android:textSize="25sp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="10dp"/>
 
             <EditText
-                android:id="@+id/firm_car_field"
+                android:id="@+id/email_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:drawableLeft="@drawable/baseline_confirmation_number_24"
+                android:drawableLeft="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
-                android:hint="Фірма транспорту"
+                android:hint="Введіть вашу пошту"
+                android:inputType="textEmailAddress"
                 android:minHeight="48dp"
-                app:layout_constraintTop_toBottomOf="@+id/data_label"
+                app:layout_constraintTop_toBottomOf="@+id/login_label"
                 tools:layout_editor_absoluteX="30dp"
-                android:inputType="text"
-                android:lines="1"
-                android:imeOptions="actionNext"/>
-
-            <EditText
-                android:id="@+id/model_car_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/baseline_directions_car_24"
-                android:drawablePadding="8dp"
-                android:hint="Модель транспорту"
-                android:minHeight="48dp"
-                app:layout_constraintTop_toBottomOf="@+id/firm_car_field"
-                tools:layout_editor_absoluteX="10dp"
-                android:inputType="text"
-                android:lines="1"
-                android:imeOptions="actionNext"/>
-
-            <EditText
-                android:id="@+id/color_car_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/baseline_invert_colors_24"
-                android:drawablePadding="8dp"
-                android:hint="Колір транспорту"
-                android:minHeight="48dp"
-                app:layout_constraintTop_toBottomOf="@+id/model_car_field"
-                tools:layout_editor_absoluteX="10dp"
-                android:inputType="text"
                 android:lines="1"
                 android:imeOptions="actionNext"/>
 
 
-            <EditText
-                android:id="@+id/number_car_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:drawableLeft="@drawable/baseline_123_24"
-                android:drawablePadding="8dp"
-                android:hint="Номер транспорту"
-                android:minHeight="48dp"
-                app:layout_constraintTop_toBottomOf="@+id/color_car_field"
-                tools:layout_editor_absoluteX="30dp"
-                android:inputType="text"
-                android:lines="1"
-                android:imeOptions="actionNext"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -141,13 +84,13 @@
                     android:textColor="@color/black" />
 
                 <Button
-                    android:id="@+id/save_car_button"
+                    android:id="@+id/reset_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_button"
-                    android:text="Зберегти"
+                    android:text="Відновити"
                     android:textColor="@color/black" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

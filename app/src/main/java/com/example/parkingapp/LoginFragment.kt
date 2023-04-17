@@ -1,5 +1,6 @@
 package com.example.parkingapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -43,19 +45,22 @@ class LoginFragment : Fragment() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
-                        // Якщо успішно, переходимо на головний екран
-                        val uid = auth.currentUser?.uid
+                        val user = auth.currentUser!!
+                        val uid = user.uid
 
-                        val uidPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                        val editor = uidPref.edit()
-                        editor.putString("UID", uid)
-                        editor.apply()
+                        if (user.isEmailVerified) {
+                            val uidPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                            val editor = uidPref.edit()
+                            editor.putString("UID", uid)
+                            editor.putString("UPASS", password)
+                            editor.apply()
 
-                        Toast.makeText(requireContext(), "Успішний вхід в систему", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Успішний вхід в систему", Toast.LENGTH_SHORT).show()
 
-                        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
-
-
+                            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                        } else {
+                            Toast.makeText(requireContext(), "Пройдіть валідацію через пошту", Toast.LENGTH_SHORT).show()
+                        }
                     } else {
                         // Якщо невдалося, виводимо повідомлення про помилку
                         Toast.makeText(requireContext(), "Невдалося увійти в систему", Toast.LENGTH_SHORT).show()
@@ -66,6 +71,11 @@ class LoginFragment : Fragment() {
         val buttonRegister = view.findViewById<Button>(R.id.to_register_button)
         buttonRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        val resetPassword = view.findViewById<TextView>(R.id.reset_password)
+        resetPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_resetFragment)
         }
 
         return view
