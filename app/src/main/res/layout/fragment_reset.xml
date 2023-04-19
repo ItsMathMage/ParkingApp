@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Відновлення"
+                android:text="@string/reset"
                 android:textAlignment="center"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/white"
@@ -43,7 +43,7 @@
                 android:id="@+id/login_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Введіть пошту для відновлення паролю"
+                android:text="@string/email_for_reset_label"
                 android:textSize="25sp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="10dp"/>
@@ -53,9 +53,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawableStart="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
-                android:hint="Введіть вашу пошту"
+                android:hint="@string/input_email_hint"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
                 app:layout_constraintTop_toBottomOf="@+id/login_label"
@@ -80,7 +80,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_button"
-                    android:text="Назад"
+                    android:text="@string/back_button"
                     android:textColor="@color/black" />
 
                 <Button
@@ -90,7 +90,7 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_button"
-                    android:text="Відновити"
+                    android:text="@string/reset_button"
                     android:textColor="@color/black" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

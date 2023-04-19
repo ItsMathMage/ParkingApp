@@ -1,6 +1,5 @@
 package com.example.parkingapp
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -50,7 +49,7 @@ class CarFragment : Fragment() {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
+                        Toast.makeText(requireContext(), "Невдалося отримати дані.", Toast.LENGTH_SHORT).show()
                     }
                 })
         }
@@ -104,7 +103,7 @@ class CarFragment : Fragment() {
                 databaseReference.child(uid).setValue(car)
                 Toast.makeText(requireContext(), "Дані успішно записані.", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Помилка!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Невдалося записати дані.", Toast.LENGTH_SHORT).show()
             }
         }
 

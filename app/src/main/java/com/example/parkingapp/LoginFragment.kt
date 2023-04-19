@@ -1,6 +1,5 @@
 package com.example.parkingapp
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -48,7 +47,6 @@ class LoginFragment : Fragment() {
                             Toast.makeText(requireContext(), "Пройдіть валідацію через пошту", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        // Якщо невдалося, виводимо повідомлення про помилку
                         Toast.makeText(requireContext(), "Невдалося увійти в систему", Toast.LENGTH_SHORT).show()
                     }
                 }

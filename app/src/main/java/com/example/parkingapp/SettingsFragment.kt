@@ -50,7 +50,7 @@ class SettingsFragment : Fragment() {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
+                        Toast.makeText(requireContext(), "Помилка в записі даних.", Toast.LENGTH_SHORT).show()
                     }
                 })
         }

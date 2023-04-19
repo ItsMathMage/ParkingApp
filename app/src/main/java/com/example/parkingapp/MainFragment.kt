@@ -61,7 +61,7 @@ class MainFragment : Fragment() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(requireContext(), "Невдалося отримати дані.", Toast.LENGTH_SHORT).show()
                 }
             })
         }
@@ -108,7 +108,7 @@ class MainFragment : Fragment() {
                                             editor.putBoolean("ISONE", true)
                                             editor.apply()
                                         } else {
-                                            Toast.makeText(requireContext(), "Зайнято", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(requireContext(), "Зайнято.", Toast.LENGTH_SHORT).show()
                                         }
                                     } else {
                                         if (isOne) {
@@ -119,18 +119,18 @@ class MainFragment : Fragment() {
                                             editor.putBoolean("ISONE", false)
                                             editor.apply()
                                         } else {
-                                            Toast.makeText(requireContext(), "Ви вже зайняли місце", Toast.LENGTH_LONG).show()
+                                            Toast.makeText(requireContext(), "Ви вже зайняли місце.", Toast.LENGTH_LONG).show()
                                         }
                                     }
                                 } else {
-                                    Toast.makeText(requireContext(), "Ви не добавили машину", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(requireContext(), "Ви не добавили машину.", Toast.LENGTH_SHORT).show()
                                 }
 
                                 updateButtons(parkingSpot)
                             }
 
                             override fun onCancelled(error: DatabaseError) {
-                                TODO("Not yet implemented")
+                                Toast.makeText(requireContext(), "Невдалося отримати дані.", Toast.LENGTH_SHORT).show()
                             }
 
                         })
@@ -203,7 +203,7 @@ class MainFragment : Fragment() {
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(requireContext(), "Невдалося отримати дані.", Toast.LENGTH_SHORT).show()
                 }
             })
         }
